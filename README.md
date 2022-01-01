@@ -1,0 +1,2 @@
+# streamit
+Music streaming platform
