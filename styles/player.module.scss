@@ -1,0 +1,79 @@
+@import "variables.scss";
+
+.player {
+  width: 100%;
+  height: 100%;
+  background-color: $green_color;
+  border-radius: 2rem;
+  display: flex;
+  align-items: center;
+  //justify-content: space-between;
+  flex-direction: column;
+
+  .image_container {
+    width: 80%;
+    height: 12rem;
+    border-radius: 1.5rem;
+    overflow: hidden;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+  .artist_container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 1rem;
+    h3 {
+      color: white;
+      font-size: 1.5rem;
+      font-weight: 500;
+      margin: 0;
+    }
+    h4 {
+      color: rgba(250, 250, 250, 0.658);
+      font-size: 0.8rem;
+      font-weight: 500;
+    }
+  }
+  .controls_container {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    .controls {
+      display: flex;
+      align-items: center;
+      justify-content: space-evenly;
+      width: 100%;
+      margin-bottom: 1rem;
+      svg {
+        fill: white;
+        transition: 0.2s ease-in;
+        &:hover {
+          transform: translateY(-0.1rem);
+        }
+      }
+    }
+    .progress {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1rem;
+      p {
+        width: 4rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+      }
+    }
+  }
+}
