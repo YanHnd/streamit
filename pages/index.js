@@ -26,8 +26,7 @@ function Home({ children }) {
         })
         .then(
           function (data) {
-            //console.log(data);
-
+            //console.log(data.body.playlists.items);
             setFeatured(data.body.playlists.items);
           },
           function (err) {

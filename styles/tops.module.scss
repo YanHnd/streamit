@@ -7,6 +7,13 @@
   border-radius: 1.5rem;
   display: flex;
   flex-direction: column;
+  .button {
+    cursor: pointer;
+    transition: 0.2s ease-in;
+    &:hover {
+      color: $secondary-color;
+    }
+  }
   justify-content: space-evenly;
   .title_container {
     display: flex;
@@ -27,6 +34,7 @@
   .card_container {
     display: flex;
     align-items: center;
+
     //padding: 1rem 1rem;
     justify-content: space-between;
     margin-top: 1.5rem;

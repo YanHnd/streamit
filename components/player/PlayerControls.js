@@ -10,28 +10,48 @@ import useStore from "../../store/store";
 import useSpotify from "../../hooks/useSpotify";
 import { useSession } from "next-auth/react";
 import { millisecondsToMinutesSeconds } from "./PlayerUtils";
+
 /**
  * @author
  * @function PlayerControls
  **/
 
-const PlayerControls = (props) => {
+const PlayerControls = ({
+  resumePlayback,
+  pausePlayback,
+  nextTrack,
+  previousTrack,
+  toggleOnrepeat,
+  toggleShuffle,
+  seekToPosition,
+}) => {
   let { shuffle, repeat, duration, progress } = useStore(
     (state) => state.playback_state
   );
-  console.log(progress);
+
   let current_track = useStore((state) => state.currentTrack);
   let is_playing = useStore((state) => state.is_playing);
   const intervalRef = useRef();
   const updateProgress = useStore((state) => state.updateProgress);
+  const scrubProgress = useStore((state) => state.scrubProgress);
 
   const startTimer = () => {
     // Clear any timers already running
     clearInterval(intervalRef.current);
     intervalRef.current = setInterval(() => {
-      // console.log("1");
       updateProgress();
     }, [1000]);
+  };
+
+  const onScrub = (value) => {
+    // Clear any timers already running
+    clearInterval(intervalRef.current);
+    scrubProgress(value);
+  };
+
+  const onScrubEnd = () => {
+    seekToPosition();
+    startTimer();
   };
 
   useEffect(() => {
@@ -42,28 +62,39 @@ const PlayerControls = (props) => {
       clearInterval(intervalRef.current);
     }
   }, [is_playing, current_track]);
-  useEffect(() => {}, []);
+
   return (
     <div className={styles.controls_container}>
       <div className={styles.progress}>
         <p>{millisecondsToMinutesSeconds(progress)}</p>
-        <input type="range" value={progress} step="1" min="0" max={duration} />
+        <input
+          type="range"
+          onChange={(e) => {
+            onScrub(e.target.value);
+          }}
+          onMouseUp={onScrubEnd}
+          onKeyUp={onScrubEnd}
+          value={progress}
+          step="1"
+          min="0"
+          max={duration}
+        />
         <p>{millisecondsToMinutesSeconds(duration)}</p>
       </div>
       <ul className={styles.controls}>
-        <li>
+        <li className={repeat ? styles.active : null} onClick={toggleOnrepeat}>
           <Onrepeat></Onrepeat>
         </li>
-        <li>
+        <li onClick={previousTrack}>
           <Previous></Previous>
         </li>
-        <li>
-          <Play></Play>
+        <li onClick={is_playing ? pausePlayback : resumePlayback}>
+          {is_playing ? <Pause /> : <Play />}
         </li>
-        <li>
+        <li onClick={nextTrack}>
           <Next></Next>
         </li>
-        <li>
+        <li className={shuffle ? styles.active : null} onClick={toggleShuffle}>
           <Shuffle></Shuffle>
         </li>
       </ul>
