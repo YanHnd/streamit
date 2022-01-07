@@ -10,6 +10,7 @@ import Favorites from "../icones/favorites.svg";
 import Local from "../icones/local.svg";
 import Recent from "../icones/recent.svg";
 import { useSession, signOut } from "next-auth/react";
+import Link from "next/link";
 
 /**
  * @author
@@ -26,12 +27,16 @@ export const Sidebar = ({ children }) => {
         <div className={styles.section}>
           <h3>MENU</h3>
           <ul className={styles.section_list}>
-            <li>
-              <Home></Home> Home
-            </li>
-            <li>
-              <Search></Search> Search
-            </li>
+            <Link href="/">
+              <li>
+                <Home></Home> Home
+              </li>
+            </Link>
+            <Link href="/search">
+              <li>
+                <Search></Search> Search
+              </li>
+            </Link>
             <li>
               <Discover></Discover> Discover
             </li>
@@ -58,7 +63,7 @@ export const Sidebar = ({ children }) => {
             </li>
           </ul>
         </div>
-        <div className={styles.section}>
+        {/* <div className={styles.section}>
           <h3>PLAYLISTS</h3>
           <ul className={styles.section_list}>
             <li>
@@ -73,9 +78,12 @@ export const Sidebar = ({ children }) => {
               {" "}
               <Album></Album> Rap
             </li>
-            <button onClick={() => signOut()}>Logout</button>
+         
           </ul>
-        </div>
+        </div> */}
+        <button className={styles.logout} onClick={() => signOut()}>
+          Logout
+        </button>
       </div>
       {children}
     </div>

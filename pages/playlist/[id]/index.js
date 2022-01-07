@@ -19,15 +19,17 @@ const Playlist = (props) => {
   const { id } = router.query;
   console.log(id);
   useEffect(() => {
-    spotifyApi.getPlaylist(id).then(
-      function (data) {
-        useStore.setState({ selectedPlaylist: data.body });
-      },
-      function (err) {
-        //if the user making the request is non-premium, a 403 FORBIDDEN response code will be returned
-        console.log("Something went wrong!", err);
-      }
-    );
+    if (spotifyApi.getAccessToken()) {
+      spotifyApi.getPlaylist(id).then(
+        function (data) {
+          useStore.setState({ selectedPlaylist: data.body });
+        },
+        function (err) {
+          //if the user making the request is non-premium, a 403 FORBIDDEN response code will be returned
+          console.log("Something went wrong!", err);
+        }
+      );
+    }
   }, [session, spotifyApi, id]);
   return <Tracklist />;
 };

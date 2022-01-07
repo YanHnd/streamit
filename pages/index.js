@@ -8,16 +8,21 @@ import { useSession } from "next-auth/react";
 import useSpotify from "../hooks/useSpotify";
 import { useEffect, useState } from "react";
 import useStore from "../store/store";
+import SkeletonElement from "../components/skletons/skeletonElement";
+import SkeletonCard from "./../components/skletons/skeletonCard";
+import { SkeletonTops } from "./../components/skletons/skeletonTops";
 
 function Home({ children }) {
   const { data: session, status } = useSession();
   const [featured, setFeatured] = useState();
   const [releases, setReleases] = useState();
+  const [loading, setLoading] = useState(false);
   const spotifyApi = useSpotify();
 
   useEffect(() => {
     //console.log(spotifyApi.getAccessToken());
     if (spotifyApi.getAccessToken() != undefined) {
+      setLoading(true);
       spotifyApi
         .getFeaturedPlaylists({
           limit: 4,
@@ -37,6 +42,7 @@ function Home({ children }) {
         function (data) {
           //console.log(data.body);
           setReleases(data.body.albums.items);
+          setLoading(false);
         },
         function (err) {
           console.log("Something went wrong!", err);
@@ -48,12 +54,21 @@ function Home({ children }) {
   return (
     <>
       <div className={styles.main_section}>
-        <Tops
-          type="playlist"
-          children={featured}
-          title="Featured playlists"
-        ></Tops>
-        <Tops title="New Releases">{releases}</Tops>
+        {loading ? (
+          <>
+            <SkeletonTops title="Featured Playlists"></SkeletonTops>
+            <SkeletonTops title="New Releases"></SkeletonTops>
+          </>
+        ) : (
+          <>
+            <Tops
+              type="playlist"
+              children={featured}
+              title="Featured playlists"
+            ></Tops>
+            <Tops title="New Releases">{releases}</Tops>
+          </>
+        )}
       </div>
     </>
   );

@@ -3,7 +3,7 @@ import Notification from "./notification";
 import useSpotify from "./../hooks/useSpotify";
 import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
-import ArtistCard from "./artist-card";
+import CategorieCard from "./categorie-card";
 import Player from "./player/player";
 
 /**
@@ -70,22 +70,22 @@ export const HorizentalLayout = ({ children }) => {
           </div>
           <div className={styles.card_container}>
             {topCategories?.slice(0, 3).map((category) => (
-              <ArtistCard
+              <CategorieCard
                 key={category.id}
                 url={category.icons[0]?.url}
                 alt={category.id}
                 name={category.name}
-              ></ArtistCard>
+              ></CategorieCard>
             ))}
           </div>
           <div className={styles.card_container}>
             {topCategories?.slice(3, 6).map((category) => (
-              <ArtistCard
+              <CategorieCard
                 key={category.id}
                 url={category.icons[0]?.url}
                 alt={category.id}
                 name={category.name}
-              ></ArtistCard>
+              ></CategorieCard>
             ))}
           </div>
         </div>

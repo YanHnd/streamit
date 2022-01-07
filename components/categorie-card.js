@@ -2,10 +2,10 @@ import styles from "../styles/card.module.scss";
 
 /**
  * @author
- * @function ArtistCard
+ * @function categorieCard
  **/
 
-const ArtistCard = ({ url, alt, name }) => {
+const CategorieCard = ({ url, alt, name }) => {
   return (
     <div className={styles.artist_card}>
       <div className={styles.image_container}>
@@ -16,4 +16,4 @@ const ArtistCard = ({ url, alt, name }) => {
   );
 };
 
-export default ArtistCard;
+export default CategorieCard;

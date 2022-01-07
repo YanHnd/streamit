@@ -1,5 +1,5 @@
 import styles from "../../styles/tracklist.module.scss";
-import PlayIcon from "../../icones/Play.svg";
+import PlayIcon from "../../icones/play.svg";
 import Pause from "../../icones/pause.svg";
 import useStore from "../../store/store";
 import { playMusic } from "./../player/PlayerFunc";
@@ -20,16 +20,16 @@ const Track = ({ number, id, url, title, artist, duration, uri }) => {
   };
 
   return (
-    <div className={styles.track}>
-      <div className={styles.left}>
+    <div className="track">
+      <div className="left">
         <h3>{number}</h3>
         <img src={url} alt="" />
         <div>
-          <h3 className={styles.artist}>{title}</h3>
+          <h3 className="artist">{title}</h3>
           <h4>{artist}</h4>
         </div>
       </div>
-      <div className={styles.right}>
+      <div className="right">
         <h3>{duration}</h3>
         <div onClick={() => play()}>
           {is_playing && current_track?.external_ids?.isrc == id ? (

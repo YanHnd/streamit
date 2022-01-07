@@ -13,6 +13,7 @@ import { millisecondsToMinutesSeconds } from "../player/PlayerUtils";
 
 const Tracklist = (props) => {
   const playlist = useStore((state) => state.selectedPlaylist);
+  console.log(playlist);
 
   return (
     <div className={styles.tracklist_container}>
@@ -40,18 +41,24 @@ const Tracklist = (props) => {
         </div>
       </div>
       <div className={styles.tracklist}>
-        {playlist?.tracks?.items.map((track, index) => (
-          <Track
-            number={index}
-            url={track.track.album.images[0]?.url}
-            id={track.track.external_ids.isrc}
-            key={track.track.id}
-            title={track.track.name}
-            artist={track.track.artists[0].name}
-            uri={track.track.uri}
-            duration={millisecondsToMinutesSeconds(track.track.duration_ms)}
-          ></Track>
-        ))}
+        {playlist?.tracks?.items.map((track, index) => {
+          return (
+            <Track
+              number={index}
+              url={track.track?.album?.images[0]?.url}
+              id={track.track?.external_ids?.isrc}
+              key={track.track?.id}
+              title={track.track?.name}
+              artist={track.track?.artists[0]?.name}
+              uri={track.track?.uri}
+              duration={
+                track.track
+                  ? millisecondsToMinutesSeconds(track.track.duration_ms)
+                  : null
+              }
+            ></Track>
+          );
+        })}
       </div>
     </div>
   );
