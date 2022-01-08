@@ -22,7 +22,7 @@ export const HorizentalLayout = ({ children }) => {
         .getCategories({
           limit: 6,
           offset: 0,
-          country: "US",
+          country: "FR",
         })
         .then((data) => {
           let top = data.body?.categories?.items;

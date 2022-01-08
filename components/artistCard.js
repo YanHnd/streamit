@@ -1,13 +1,17 @@
 import styles from "../styles/card.module.scss";
-
+import { useRouter } from "next/router";
 /**
  * @author
  * @function Card
  **/
 
 export const ArtistCArd = (props) => {
+  const router = useRouter();
+  const handleClick = () => {
+    router.push(`/artist/${props.id}`);
+  };
   return (
-    <div className={styles.card}>
+    <div onClick={() => handleClick()} className={styles.card}>
       <div className={styles.image_container}>
         <img src={props.url} />
       </div>

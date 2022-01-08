@@ -35,12 +35,15 @@ export const PlayerLayout = (props) => {
 
   useEffect(() => {
     let token = spotifyApi.getAccessToken();
-    if (token) {
-      streamItPlayer.current = usePlayer({ streamItPlayer });
+    streamItPlayer.current = usePlayer({ streamItPlayer });
+    if (spotifyApi.getAccessToken()) {
       getPlayerInfo({ spotifyToken: token });
     }
   }, [spotifyApi]);
-
+  const connect = () => {
+    console.log(streamItPlayer.current);
+    streamItPlayer.current.connect();
+  };
   return (
     <div className={styles.player}>
       <div className={styles.image_container}>

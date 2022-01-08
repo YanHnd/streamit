@@ -9,20 +9,20 @@ import spotifyApi from "./../../../lib/spotify";
 import useStore from "./../../../store/store";
 /**
  * @author
- * @function Playlist
+ * @function Album
  **/
-const Playlist = ({ type }) => {
+const Album = ({ type }) => {
   const router = useRouter();
   const spotifyApi = useSpotify();
-  const [playlist, setPlaylist] = useState();
+  const [album, setAlbum] = useState();
   const { data: session, status } = useSession();
   const { id } = router.query;
-  console.log(id);
+
   useEffect(() => {
     if (spotifyApi.getAccessToken()) {
-      spotifyApi.getPlaylist(id).then(
+      spotifyApi.getAlbum(id).then(
         function (data) {
-          useStore.setState({ selectedPlaylist: data.body });
+          useStore.setState({ selectedAlbum: data.body });
         },
         function (err) {
           //if the user making the request is non-premium, a 403 FORBIDDEN response code will be returned
@@ -31,12 +31,12 @@ const Playlist = ({ type }) => {
       );
     }
   }, [session, spotifyApi, id]);
-  return <Tracklist type="playlist" />;
+  return <Tracklist type="album" />;
 };
 
-export default Playlist;
+export default Album;
 
-Playlist.getLayout = (page) => (
+Album.getLayout = (page) => (
   <Sidebar>
     <HorizentalLayout>{page}</HorizentalLayout>
   </Sidebar>

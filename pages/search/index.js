@@ -25,7 +25,7 @@ const Search = (props) => {
   const [searchTracks, setSearchTracks] = useState();
   const [searchArtists, setSearchArtists] = useState();
   const [searchplaylists, setSearchPlaylists] = useState();
-  console.log(searchTracks);
+  //console.log(searchTracks);
   let debouncedSearch = useCallback(
     debounce((keywords) => {
       spotifyApi.searchTracks(keywords).then(
@@ -38,6 +38,7 @@ const Search = (props) => {
       );
       spotifyApi.searchArtists(keywords).then(
         function (data) {
+          console.log(data.body.artists);
           setSearchArtists(data.body.artists.items);
         },
         function (err) {
@@ -46,7 +47,7 @@ const Search = (props) => {
       );
       spotifyApi.searchPlaylists(keywords).then(
         function (data) {
-          console.log(data.body);
+          // console.log(data.body);
           setSearchPlaylists(data.body.playlists.items);
         },
         function (err) {
@@ -171,6 +172,7 @@ const Search = (props) => {
             <div className={style.card_container}>
               {searchArtists?.slice(0, 4).map((artist, index) => (
                 <ArtistCArd
+                  id={artist.id}
                   url={artist.images[0]?.url}
                   name={artist.name}
                 ></ArtistCArd>
@@ -186,6 +188,7 @@ const Search = (props) => {
           <div className={style.card_container}>
             {searchArtists?.map((artist, index) => (
               <ArtistCArd
+                id={artist.id}
                 url={artist.images[0]?.url}
                 name={artist.name}
               ></ArtistCArd>

@@ -66,7 +66,7 @@ function Home({ children }) {
               children={featured}
               title="Featured playlists"
             ></Tops>
-            <Tops title="New Releases">{releases}</Tops>
+            <Tops type="album" children={releases} title="New Releases"></Tops>
           </>
         )}
       </div>

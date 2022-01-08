@@ -25,6 +25,9 @@ export const Card = (props) => {
       e.preventDefault();
       router.push(`/playlist/${props.id}`);
     }
+    if (props.type == "album") {
+      router.push(`/album/${props.id}`);
+    }
   };
   const play = () => {
     playPlaylist(device, props.uri, spotifyApi, props.id, props.type);
