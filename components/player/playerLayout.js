@@ -47,7 +47,13 @@ export const PlayerLayout = (props) => {
   return (
     <div className={styles.player}>
       <div className={styles.image_container}>
-        <img src={current_track?.album?.images[0]?.url} alt="" />
+        {current_track ? (
+          <img src={current_track?.album?.images[0]?.url} alt="" />
+        ) : (
+          <div className={styles.image_filler}>
+            <h3>Start listening</h3>
+          </div>
+        )}
       </div>
       <div className={styles.artist_container}>
         <h3>{current_track?.artists[0]?.name}</h3>

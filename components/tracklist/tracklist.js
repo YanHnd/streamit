@@ -73,6 +73,7 @@ const Tracklist = ({ type }) => {
                   title={track.track?.name}
                   artist={track.track?.artists[0]?.name}
                   uri={track.track?.uri}
+                  artistId={track?.track?.artists[0]?.id}
                   duration={
                     track.track
                       ? millisecondsToMinutesSeconds(track.track.duration_ms)
@@ -90,6 +91,7 @@ const Tracklist = ({ type }) => {
                   key={track?.id}
                   title={track?.name}
                   artist={track?.artists[0]?.name}
+                  artistId={album?.artists[0]?.id}
                   uri={track?.uri}
                   duration={
                     track

@@ -22,6 +22,17 @@
       height: 100%;
       object-fit: cover;
     }
+    .image_filler {
+      width: 100%;
+      height: 100%;
+      justify-content: center;
+      align-items: center;
+      display: flex;
+      background-color: #fff;
+      h3 {
+        color: $text-color;
+      }
+    }
   }
   .artist_container {
     width: 100%;
